@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper text-ink antialiased;
+    font-feature-settings: 'ss01', 'cv01';
+  }
+  ::selection {
+    background: #1e9ae0;
+    color: #ffffff;
+  }
+  :focus-visible {
+    outline: 2px solid #101b27;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold transition-all duration-200 ease-out disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-ink text-paper hover:-translate-y-0.5 hover:bg-steel hover:shadow-lift;
+  }
+  .btn-signal {
+    @apply btn bg-brand text-white hover:-translate-y-0.5 hover:bg-brandDark hover:shadow-lift;
+  }
+  .btn-ghost {
+    @apply btn border border-ink/20 bg-transparent text-ink hover:-translate-y-0.5 hover:border-ink hover:bg-ink hover:text-paper;
+  }
+  .field {
+    @apply w-full rounded-sm border border-ink/20 bg-white px-4 py-3 text-sm text-ink placeholder:text-mist transition-colors focus:border-brand focus:outline-none;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-steel;
+  }
+  .rule {
+    @apply border-t border-ink/10;
+  }
+  /* Any image wrapped with this class gently zooms on hover — used across
+     product cards, the hero collage, and the about-page photo. */
+  .hover-zoom {
+    @apply overflow-hidden;
+  }
+  .hover-zoom img {
+    @apply transition-transform duration-500 ease-out;
+  }
+  .hover-zoom:hover img {
+    @apply scale-110;
+  }
+  .card-lift {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-card;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
