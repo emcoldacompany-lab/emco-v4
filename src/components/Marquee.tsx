@@ -19,7 +19,7 @@ export default function Marquee({ items }: { items: MarqueeItem[] }) {
             key={`${item.src}-${i}`}
             className="relative h-20 w-20 shrink-0 overflow-hidden rounded-sm bg-white/5 transition-transform duration-300 hover:z-10 hover:scale-110 sm:h-24 sm:w-24"
           >
-            <Image src={item.src} alt={item.alt} fill sizes="96px" className="object-cover" />
+            <Image src={item.src} alt={item.alt} fill sizes="96px" className="object-cover" unoptimized />
           </div>
         ))}
       </div>

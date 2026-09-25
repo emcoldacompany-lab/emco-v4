@@ -30,63 +30,84 @@ export default function HomeContent({
 
       <main>
         {/* Hero */}
-        <section className="border-b border-ink/10 bg-gradient-to-br from-ink via-ink to-brandDeep text-paper">
-          <div className="wrap grid gap-12 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
-            <div className="animate-fade-up">
-              <h1 className="font-narrow text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
-                {t('hero_title')}
-              </h1>
-              <p className="mt-5 max-w-lg text-base leading-relaxed text-mist">{t('hero_sub')}</p>
-              <p className="mt-3 max-w-lg text-sm font-medium text-brand">{t('hero_tagline')}</p>
+        <section
+  className="relative flex min-h-[520px] items-center overflow-hidden
+  border-b border-ink/10 text-paper lg:min-h-[620px]"
+>
+  <Image
+    src="/storefront.jpg"
+    alt="EMCO LDA storefront"
+    fill
+    sizes="100vw"
+    priority
+    unoptimized
+    className="object-cover"
+  />
 
-              <form action="/products" className="mt-8 flex max-w-lg gap-2">
-                <input
-                  name="q"
-                  type="search"
-                  placeholder={t('hero_search')}
-                  aria-label="Search"
-                  className="w-full rounded-sm border border-white/20 bg-white/5 px-4 py-3.5 text-sm text-paper placeholder:text-mist transition-colors focus:border-brand focus:outline-none"
-                />
-                <button className="btn-signal shrink-0">{t('hero_search_btn')}</button>
-              </form>
+  <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/85 to-brandDeep/90" />
+  <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-transparent" />
 
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/contact" className="btn-signal">{t('hero_cta_quote')}</Link>
-                <Link
-                  href="/products"
-                  className="btn border border-white/25 text-paper hover:-translate-y-0.5 hover:border-white hover:bg-white/10"
-                >
-                  {t('hero_cta_explore')}
-                </Link>
-              </div>
+  <div className="wrap relative py-16 lg:py-24">
+    <div className="max-w-xl animate-fade-up">
+      <h1 className="font-narrow text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
+        {t('hero_title')}
+      </h1>
 
-              <dl className="mt-10 flex flex-wrap gap-x-10 gap-y-5">
-                {[
-                  [t('stat_1_v'), t('stat_1_l')],
-                  [t('stat_2_v'), t('stat_2_l')],
-                  [t('stat_3_v'), t('stat_3_l')],
-                ].map(([value, label]) => (
-                  <div key={label as string}>
-                    <dt className="font-narrow text-2xl font-bold text-brand">{value}</dt>
-                    <dd className="mt-0.5 text-sm text-mist">{label}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
+      <p className="mt-5 max-w-lg text-base leading-relaxed text-mist">
+        {t('hero_sub')}
+      </p>
 
-            {/* Our own storefront, not a stock photo */}
-            <div className="hover-zoom relative hidden min-h-[420px] animate-fade-in overflow-hidden rounded-sm border border-white/10 bg-white/5 lg:block">
-              <Image
-                src="/storefront.jpg"
-                alt="EMCO LDA storefront"
-                fill
-                sizes="(max-width: 1024px) 0px, 40vw"
-                className="object-cover"
-                priority
-              />
-            </div>
+      <p className="mt-3 max-w-lg text-sm font-medium text-brand">
+        {t('hero_tagline')}
+      </p>
+
+      <form action="/products" className="mt-8 flex max-w-lg gap-2">
+        <input
+          name="q"
+          type="search"
+          placeholder={t('hero_search')}
+          aria-label="Search"
+          className="w-full rounded-sm border border-white/20 bg-white/10 px-4 py-3.5 text-sm text-paper placeholder:text-mist backdrop-blur-sm transition-colors focus:border-brand focus:outline-none"
+        />
+
+        <button className="btn-signal shrink-0">
+          {t('hero_search_btn')}
+        </button>
+      </form>
+
+      <div className="mt-6 flex flex-wrap gap-3">
+        <Link href="/contact" className="btn-signal">
+          {t('hero_cta_quote')}
+        </Link>
+
+        <Link
+          href="/products"
+          className="btn border border-white/25 text-paper hover:-translate-y-0.5 hover:border-white hover:bg-white/10"
+        >
+          {t('hero_cta_explore')}
+        </Link>
+      </div>
+
+      <dl className="mt-10 flex flex-wrap gap-x-10 gap-y-5">
+        {[
+          [t('stat_1_v'), t('stat_1_l')],
+          [t('stat_2_v'), t('stat_2_l')],
+          [t('stat_3_v'), t('stat_3_l')],
+        ].map(([value, label]) => (
+          <div key={label as string}>
+            <dt className="font-narrow text-2xl font-bold text-brand">
+              {value}
+            </dt>
+
+            <dd className="mt-0.5 text-sm text-mist">
+              {label}
+            </dd>
           </div>
-        </section>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>
 
         {/* Infinite scrolling marquee of stock photos */}
         <Marquee items={showcase} />

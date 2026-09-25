@@ -15,7 +15,7 @@ export default function SiteFooter() {
       <div className="wrap grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-2.5">
-            <Image src="/logo-icon.png" alt="EMCO LDA" width={36} height={36} className="rounded-full" />
+            <Image src="/logo-icon.png" alt="EMCO LDA" width={36} height={36} className="rounded-full" unoptimized />
             <p className="font-narrow text-xl font-bold">EMCO LDA</p>
           </div>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-mist">{t('footer_desc')}</p>

@@ -27,7 +27,7 @@ export default function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-ink/10 bg-paper/95 backdrop-blur">
       <div className="wrap flex h-16 items-center justify-between gap-6">
         <Link href="/" className="flex items-center gap-2.5 transition-opacity hover:opacity-80">
-          <Image src="/logo-icon.png" alt="EMCO LDA" width={38} height={38} className="rounded-full" priority />
+          <Image src="/logo-icon.png" alt="EMCO LDA" width={38} height={38} className="rounded-full" priority unoptimized />
           <span className="font-narrow text-xl font-bold tracking-tight">EMCO LDA</span>
         </Link>
 
