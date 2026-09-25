@@ -91,6 +91,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
                   alt={product.name}
                   fill
                   priority
+                  unoptimized
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
                 />
@@ -102,7 +103,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
               <div className="grid grid-cols-4 gap-3">
                 {product.images.slice(1, 5).map((src: string) => (
                   <div key={src} className="relative aspect-square bg-concrete">
-                    <Image src={src} alt="" fill sizes="20vw" className="object-cover" />
+                    <Image src={src} alt="" fill sizes="20vw" className="object-cover" unoptimized  />
                   </div>
                 ))}
               </div>
