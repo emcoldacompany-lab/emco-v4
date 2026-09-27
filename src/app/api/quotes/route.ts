@@ -1,3 +1,4 @@
+import { Resend } from 'resend';
 import { connectDB } from '@/lib/db';
 import { Quote } from '@/models/Quote';
 import { requireAdmin } from '@/lib/auth';
@@ -23,7 +24,28 @@ export async function POST(req: Request) {
     productName: body.productName || '',
   });
 
-  // Hook an email/SMS notification in here later (Resend, Africa's Talking, etc.)
+  // Email the sales desk — fire-and-forget, so a slow/failed email never
+  // blocks the visitor's confirmation or loses the quote itself.
+  if (process.env.RESEND_API_KEY) {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    resend.emails
+      .send({
+        from: process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev',
+        to: process.env.RESEND_TO_EMAIL || 'emcoldacompany@gmail.com',
+        subject: `New quote request — ${quote.name}`,
+        text: [
+          `Name: ${quote.name}`,
+          `Company: ${quote.company || '—'}`,
+          `Phone: ${quote.phone}`,
+          `Email: ${quote.email || '—'}`,
+          `Product: ${quote.productName || '—'}`,
+          `Quantity: ${quote.quantity || '—'}`,
+          `Message: ${quote.message || '—'}`,
+        ].join('\n'),
+      })
+      .catch((err) => console.error('[resend]', err));
+  }
+
   return Response.json({ ok: true, id: quote._id }, { status: 201 });
 }
 
