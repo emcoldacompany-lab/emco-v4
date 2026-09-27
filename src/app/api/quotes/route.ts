@@ -26,10 +26,10 @@ export async function POST(req: Request) {
 
   // Email the sales desk — fire-and-forget, so a slow/failed email never
   // blocks the visitor's confirmation or loses the quote itself.
-  if (process.env.RESEND_API_KEY) {
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    resend.emails
-      .send({
+    if (process.env.RESEND_API_KEY) {
+    try {
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      const result = await resend.emails.send({
         from: process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev',
         to: process.env.RESEND_TO_EMAIL || 'emcoldacompany@gmail.com',
         subject: `New quote request — ${quote.name}`,
@@ -42,8 +42,12 @@ export async function POST(req: Request) {
           `Quantity: ${quote.quantity || '—'}`,
           `Message: ${quote.message || '—'}`,
         ].join('\n'),
-      })
-      .catch((err) => console.error('[resend]', err));
+      });
+      if (result.error) console.error('[resend] rejected:', result.error);
+      else console.log('[resend] sent:', result.data?.id);
+    } catch (err) {
+      console.error('[resend] threw:', err);
+    }
   }
 
   return Response.json({ ok: true, id: quote._id }, { status: 201 });
